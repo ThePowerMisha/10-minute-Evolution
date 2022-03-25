@@ -59,7 +59,5 @@ public class Player : MonoBehaviour
     private void SetAnimationDirection(Vector2 direction)
     {
         _animator.SetFloat("xDir", direction.x);
-        _animator.SetFloat("yDir", direction.y);
-
     }
 }

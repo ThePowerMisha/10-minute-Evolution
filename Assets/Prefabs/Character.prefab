@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2416649652431040368}
   - component: {fileID: 5177219734829960679}
   m_Layer: 0
-  m_Name: character
+  m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,6 +110,7 @@ MonoBehaviour:
   minDamage: 4
   maxDamage: 7
   projectileForce: 3
+  shootdelay: 2
 --- !u!212 &5177219734829960679
 SpriteRenderer:
   m_ObjectHideFlags: 0

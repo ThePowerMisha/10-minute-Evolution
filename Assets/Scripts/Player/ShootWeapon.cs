@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
-
+using UnityEngine.Serialization;
 
 
 public class ShootWeapon : MonoBehaviour
@@ -12,13 +12,13 @@ public class ShootWeapon : MonoBehaviour
     public float minDamage;
     public float maxDamage;
     public float projectileForce;
-    private float _shootdelay = 0.5f;
+    public float shootdelay;
     private float _timer;
 
     private void Update()
     {
         _timer += Time.deltaTime;
-        if (Input.GetMouseButtonDown(0) && _timer > 1/ _shootdelay)
+        if (Input.GetMouseButtonDown(0) && _timer > 1/ shootdelay)
         {
             GameObject spell = Instantiate(projectile, transform.position, Quaternion.identity);
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

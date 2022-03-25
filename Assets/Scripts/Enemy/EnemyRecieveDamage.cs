@@ -5,38 +5,31 @@ using UnityEngine.Serialization;
 
 public class EnemyRecieveDamage : MonoBehaviour
 {
-    [FormerlySerializedAs("Health")] public float health;
-
-    [FormerlySerializedAs("MaxHealth")] public float maxHealth;
-    // Start is called before the first frame update
+    public float Health;
+    public float MaxHealth;
+    
     void Start()
     {
-        health = maxHealth;
+        Health = MaxHealth;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public void DealDamage(float damage)
     {
-        health -= damage;
+        Health -= damage;
         CheckDeath();
     }
 
     private void CheckOverHeal()
     {
-        if (health > maxHealth)
+        if (Health > MaxHealth)
         {
-            health = maxHealth;
+            Health = MaxHealth;
         }
     }
 
     private void CheckDeath()
     {
-        if (health <= 0)
+        if (Health <= 0)
         {
             Destroy(gameObject);
         }
