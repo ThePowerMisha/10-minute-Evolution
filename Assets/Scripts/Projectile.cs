@@ -15,7 +15,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.name != "Character" && other.name != gameObject.name)
+        if (other.name != "Character" && !other.CompareTag("Projectile"))
         {
             if (other.GetComponent<EnemyRecieveDamage>() != null)
             {
@@ -23,10 +23,5 @@ public class Projectile : MonoBehaviour
             }
             Destroy(gameObject);
         }
-
-        // if (Time.time > _lifetime)
-        // {
-        //     Destroy(gameObject);
-        // }
     }
 }
