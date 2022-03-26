@@ -22,7 +22,8 @@ public class SkillActions : MonoBehaviour
             shoot.transform.Rotate(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
             
             shoot.GetComponent<Rigidbody2D>().velocity = direction * Random.Range(1, 7);
-            shoot.GetComponent<Projectile>().damage = UnityEngine.Random.Range(minDamage, maxDamage);
+            shoot.GetComponent<Projectile>().minDamage = minDamage;
+            shoot.GetComponent<Projectile>().maxDamage = maxDamage;
         }
     }
 }

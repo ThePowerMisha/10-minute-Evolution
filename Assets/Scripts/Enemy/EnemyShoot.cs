@@ -32,7 +32,7 @@ public class EnemyShoot : MonoBehaviour
                 GameObject shoot = Instantiate(projectile, transform.position, Quaternion.identity);
                 shoot.transform.Rotate(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
                 shoot.GetComponent<Rigidbody2D>().velocity = direction * projectileForce;
-                shoot.GetComponent<EnemyProjectile>().damage = UnityEngine.Random.Range(minDamage, maxDamage);
+                //shoot.GetComponent<EnemyProjectile>().damage = UnityEngine.Random.Range(minDamage, maxDamage);
                 
             }
             StartCoroutine(ShootPlayer());

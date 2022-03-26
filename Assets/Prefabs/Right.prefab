@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6865283546827940594}
   - component: {fileID: -8331639091944336581}
   - component: {fileID: 375049909930762933}
-  - component: {fileID: -6297890371536247619}
   m_Layer: 0
   m_Name: Right
   m_TagString: Untagged
@@ -96,8 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1046704d309376d479085a6ebdd064c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 0
-  MaxHealth: 100
+  health: 0
+  maxHealth: 0
 --- !u!61 &375049909930762933
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -124,21 +123,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6096878, y: 1.8283567}
   m_EdgeRadius: 0
---- !u!114 &-6297890371536247619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6865283546827940595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a23a4322eee63864dbc4df26bb442abe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 40458772115126277, guid: 0d19d1e2156551349a69e815ed7d0ca5,
-    type: 3}
-  minDamage: 5
-  maxDamage: 7
-  projectileForce: 4
-  cooldown: 1

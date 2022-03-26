@@ -9,26 +9,22 @@ public class SkillData : ScriptableObject
     /// <summary>
     ///     Иконка навыка
     /// </summary>
-    [Header("Иконка навыка")]
-    public Sprite skillIcon;
+    [Header("Иконка навыка")] public Sprite skillIcon;
 
     /// <summary>
     ///     Идентификатор навыка (все навыки связываются и ищутся по нему)
     /// </summary>
-    [Header("Идентификатор навыка")]
-    public int skillID;
+    [Header("Идентификатор навыка")] public int skillID;
 
     /// <summary>
     ///     Наименование навыка
     /// </summary>
-    [Header("Наименование навыка")]
-    public string skillName;
+    [Header("Наименование навыка")] public string skillName;
 
     /// <summary>
     ///     Подробное описание навыка
     /// </summary>
-    [Header("Подробное описание навыка")]
-    [TextArea(5, 10)]
+    [Header("Подробное описание навыка")] [TextArea(5, 10)]
     public string skillDescr;
 
     /// <summary>

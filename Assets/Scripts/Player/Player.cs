@@ -5,59 +5,52 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
+    public Rigidbody2D rb;
     public float speed;
-    private Vector2 _direction;
-    private Animator _animator;
-    private static readonly int YDir = Animator.StringToHash("yDir");
-    private static readonly int XDir = Animator.StringToHash("xDir");
+    public Animator animator;
+    public Projectile projectile;
+    public float cooldown;
+    
+    private float _timer;
+    private Vector2 movement;
 
     void Start()
     {
-        _animator = GetComponent<Animator>();
+        _timer = 0;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        TakeInput();
-        Move();
-    }
-
-    private void TakeInput()
-    {
-        _direction = Vector2.zero;
-        if (Input.GetKey(KeyCode.W))
+        Shoot();
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
+        animator.SetFloat("Horizontal",movement.x);
+        animator.SetFloat("Vertical",movement.y);
+        if (movement.x == 0 & movement.y == 0)
         {
-            _direction += Vector2.up;
+            animator.SetBool("IsIdle",true);
         }
-        if (Input.GetKey(KeyCode.S))
+        else
         {
-            _direction += Vector2.down;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            _direction += Vector2.left;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            _direction += Vector2.right;
-        }
-        
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            speed=8;
+            animator.SetBool("IsIdle",false);
         }
     }
 
-    private void Move()
+    private void FixedUpdate()
     {
-        transform.Translate(_direction * (speed * Time.deltaTime));
-        SetAnimationDirection(_direction);
+        rb.MovePosition(rb.position + movement * speed);
     }
 
-    private void SetAnimationDirection(Vector2 direction)
+    private void Shoot()
     {
-        _animator.SetFloat("xDir", direction.x);
+        _timer += Time.deltaTime;
+        if (Input.GetMouseButton(0) && _timer > 1/ cooldown)
+        {
+            projectile.targetTag = "Enemy";
+            projectile.CreateProjectileToMousePosition(transform.position);
+            _timer = 0;
+        }
     }
 }

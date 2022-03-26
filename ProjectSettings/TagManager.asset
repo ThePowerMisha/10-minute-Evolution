@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Projectile
+  - Enemy
+  - Coins
+  - Score
   layers:
   - Default
   - TransparentFX

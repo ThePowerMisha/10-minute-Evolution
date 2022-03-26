@@ -147,4 +147,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c33565cf94e9ac1478735986b436bbe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  minDamage: 10
+  maxDamage: 15
+  speed: 5
+  lifetime: 4
+  sprite: {fileID: 0}
+  target: {fileID: 0}
+  targetTag: 

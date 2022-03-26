@@ -26,7 +26,7 @@ public class ShootWeapon : MonoBehaviour
             Vector2 direction = (mousePos - myPos).normalized;
             spell.transform.Rotate(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
             spell.GetComponent<Rigidbody2D>().velocity = direction * projectileForce;
-            spell.GetComponent<Projectile>().damage = UnityEngine.Random.Range(minDamage, maxDamage);
+            //spell.GetComponent<Projectile>().damage = UnityEngine.Random.Range(minDamage, maxDamage);
             _timer = 0;
         }
     }
