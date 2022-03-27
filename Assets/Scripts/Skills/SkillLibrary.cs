@@ -11,6 +11,8 @@ public class SkillLibrary : MonoBehaviour
     {
         var data = allSkills.Find(x => x.skillData.skillID == skillID);
 
+        if (data == null) return null;
+
         var newData = new SkillBase();
         newData.skillData = data.skillData;
         newData.onSkillUsed = data.onSkillUsed;

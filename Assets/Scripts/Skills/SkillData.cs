@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 [CreateAssetMenu(fileName = "new SkillData", menuName = "Create/SkillData")]
@@ -24,13 +22,14 @@ public class SkillData : ScriptableObject
     /// <summary>
     ///     Подробное описание навыка
     /// </summary>
-    [Header("Подробное описание навыка")] [TextArea(5, 10)]
+    [Header("Подробное описание навыка")]
+    [TextArea(5, 10)]
     public string skillDescr;
 
     /// <summary>
-    ///     Кулдаун навыка. Сколько раз в минуту применить навык
+    ///     Кулдаун навыка. Время перезарядки в секундах
     /// </summary>
-    [Header("Кулдаун. Сколько раз в минуту")]
+    [Header("Кулдаун навыка. Время перезарядки в секундах")]
     public float skillCooldown;
 
     /// <summary>
@@ -38,4 +37,10 @@ public class SkillData : ScriptableObject
     /// </summary>
     [Header("Необходимый опыт для получения")]
     public float skillExpToObtain;
+
+    /// <summary>
+    ///     Идентификатор навыка на который заменится текущий навык после эволюции
+    /// </summary>
+    [Header("Идентификатор навыка для эволюции")]
+    public int evoleToSkillID = -1;
 }

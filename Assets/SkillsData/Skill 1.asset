@@ -16,5 +16,6 @@ MonoBehaviour:
   skillID: 0
   skillName: "\u0413\u0440\u0430\u0434 \u0441\u0442\u0440\u0435\u043B"
   skillDescr: 
-  skillCooldown: 60
+  skillCooldown: 15
   skillExpToObtain: 5
+  evoleToSkillID: -1

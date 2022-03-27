@@ -11,7 +11,7 @@ public class SkillsSystem : MonoBehaviour
     /// <summary>
     ///     Навыки персонажа (уже изученные)
     /// </summary>
-    [HideInInspector()] public List<SkillBase> skills = new List<SkillBase>();
+    [HideInInspector()] public List<UsableSkill> skills = new List<UsableSkill>();
 
     /// <summary>
     ///     Навыки персонажа (изучаемые)
@@ -23,11 +23,13 @@ public class SkillsSystem : MonoBehaviour
     /// </summary>
     public UnityEvent onSkillsUpdated;
 
+    public UnityEvent onSkillCooldownUpdated;
+
     private float cooldownsRefreshTimer = 0.01f;
 
-    private float[] cooldowns = new float[5];
-
     private Coroutine cooldownsCoroutine;
+
+    private List<int> blackList = new List<int>(); 
 
     private void Start()
     {
@@ -41,16 +43,10 @@ public class SkillsSystem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            GainExpToSkill(0, 1);
-        }
+        if (Input.GetKeyDown(KeyCode.U))
+            EvolveSkills();
 
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            GainExpToSkill(1, 1);
-        }
-
+        // Нажатия на слоты навыков
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             UseSkill(0);
@@ -87,10 +83,48 @@ public class SkillsSystem : MonoBehaviour
 
         if (index >= skills.Count) return;
 
-        if (cooldowns[index] == 0)
+        if (skills[index].currentCooldown == 0)
         {
-            skills[index].UseSkill();
+            skills[index].currentCooldown = skills[index].cooldown;
+            skills[index].skill.UseSkill();
         }
+    }
+
+    public void EvolveSkills()
+    {
+        List<UsableSkill> evolvedSkills = new List<UsableSkill>();
+
+        // Проходимся по каждому навыку
+        for (int i = 0; i < skills.Count; i++)
+        {
+            // Получаем ID навыка для эволюции
+            var skillEvolveID = skills[i].skill.skillData.evoleToSkillID;
+
+            // Получаем сам объект навыка для эволюции
+            var evolvedSkill = library.GetSkillDataByID(skillEvolveID);
+
+            // Если навык не нашли, то оставляем прошлый навык, значит его нельзя эвольвнуть
+            if (evolvedSkill == null || skillEvolveID == -1)
+            {
+                evolvedSkills.Add(new UsableSkill(skills[i].skill));
+            }
+            // Иначе заменяем навык на новый
+            else
+            {
+                evolvedSkills.Add(new UsableSkill(evolvedSkill));
+                blackList.Add(skills[i].skill.skillData.skillID);
+            }
+        }
+
+        // Удаляем старые навыки
+        skills.Clear();
+
+        // Добавляем новые навыки
+        foreach (var skill in evolvedSkills)
+            skills.Add(skill);
+
+        // Обновляем UI и т.п.
+        onSkillsUpdated?.Invoke();
     }
 
     /// <summary>
@@ -107,11 +141,23 @@ public class SkillsSystem : MonoBehaviour
         // Находим наш навык в изучаемых
         var skill = learningSkills.Find(x => x.skillID == skillID);
 
+        bool existed = false;
+
         // Проверяем если у нас уже изучен навык
-        var existed = skills.Find(x => x.skillData.skillID == skillID);
+        foreach (var item in skills)
+        {
+            if (item.skill.skillData.skillID == skillID)
+                existed = true;
+        }
+
+        // Проверяем не эволюционировали ли мы навык
+        foreach (var item in blackList)
+        {
+            if (item == skillID) return;
+        }
 
         // Если навык не существует в уже изученных проверяем дальше
-        if (existed == null)
+        if (existed == false)
         {
             // Если не нашли навык в изучаемых и в изученных его тоже нет
             if (skill == null)
@@ -132,7 +178,7 @@ public class SkillsSystem : MonoBehaviour
                 skill.GainExp(exp);
             }
         }
-        
+
         onSkillsUpdated?.Invoke();
     }
 
@@ -146,7 +192,7 @@ public class SkillsSystem : MonoBehaviour
     private void AddNewSkill(int skillID)
     {
         var newSkill = library.GetSkillDataByID(skillID);
-        skills.Add(newSkill);
+        skills.Add(new UsableSkill(newSkill));
     }
 
     private void RemoveLearningSkill(int skillID)
@@ -159,13 +205,15 @@ public class SkillsSystem : MonoBehaviour
     {
         while (true)
         {
-            for (int i = 0; i < cooldowns.Length; i++)
+            for (int i = 0; i < skills.Count; i++)
             {
-                if (cooldowns[i] > 0) cooldowns[i] -= cooldownsRefreshTimer;
-                if (cooldowns[i] < 0) cooldowns[i] = 0;
+                skills[i].currentCooldown -= cooldownsRefreshTimer;
+                if (skills[i].currentCooldown <= 0) skills[i].currentCooldown = 0;
             }
 
+            onSkillCooldownUpdated?.Invoke();
+
             yield return new WaitForSeconds(cooldownsRefreshTimer);
-        } 
+        }
     }
 }

@@ -8,6 +8,10 @@ TagManager:
   - Enemy
   - Coins
   - Score
+  - Drop
+  - Magnet
+  - Exp
+  - Skill
   layers:
   - Default
   - TransparentFX

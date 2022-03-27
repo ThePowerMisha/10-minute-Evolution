@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,14 +19,36 @@ public class SkillsPresenter : MonoBehaviour
     [Header("Родитель изученных навыков")]
     public Transform skillsParent;
 
+    public List<Image> cooldownImages = new List<Image>();
+
     private void Awake()
     {
         skillSystem.onSkillsUpdated.AddListener(UpdateUISkills);
+        skillSystem.onSkillCooldownUpdated.AddListener(UpdateCooldowns);
     }
 
-    public void UdpateCooldowns()
+    private void Start()
     {
-        
+        InitEmptySkillSlots();
+    }
+
+    private void InitEmptySkillSlots()
+    {
+        if (skillSystem.skills.Count < 5)
+        {
+            for (int i = 0; i < 5 - skillSystem.skills.Count; i++)
+            {
+                Instantiate(skillPrefab, skillsParent);
+            }
+        }
+    }
+
+    public void UpdateCooldowns()
+    {
+        for (int i = 0; i < cooldownImages.Count; i++)
+        {
+            cooldownImages[i].fillAmount = skillSystem.skills[i].GetCooldownDelta();
+        }
     }
 
     private void UpdateUISkills()
@@ -55,11 +76,19 @@ public class SkillsPresenter : MonoBehaviour
             Destroy(skillsParent.GetChild(i).gameObject);
         }
 
+        cooldownImages.Clear();
+
         for (int i = 0; i < skillSystem.skills.Count; i++)
         {
             var skillGO = Instantiate(skillPrefab, skillsParent);
 
-            skillGO.transform.GetChild(0).GetComponent<Image>().sprite = skillSystem.skills[i].skillData.skillIcon;
+            skillGO.transform.GetChild(0).GetComponent<Image>().sprite = skillSystem.skills[i].skill.skillData.skillIcon;
+            cooldownImages.Add(skillGO.transform.GetChild(1).GetComponent<Image>());
         }
+
+        // Дорисовываем пустые клетки если они нужны нам
+        InitEmptySkillSlots();
+
+        UpdateCooldowns();
     }
 }

@@ -1,21 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class HeathSystem : MonoBehaviour
 {
     public float health;
     public float maxHealth;
-    
-    void Start()
+    public UnityEvent onCharacterDead = new UnityEvent();
+
+    private void Start()
     {
         health = maxHealth;
     }
-    
+
     public void DealDamage(float damage)
     {
         health -= damage;
+        CheckOverHeal();
         CheckDeath();
     }
 
@@ -31,7 +31,11 @@ public class HeathSystem : MonoBehaviour
     {
         if (health <= 0)
         {
-            Destroy(gameObject);
+            health = 0;
+
+            onCharacterDead?.Invoke();
+
+            Destroy(this.gameObject);
         }
     }
 }

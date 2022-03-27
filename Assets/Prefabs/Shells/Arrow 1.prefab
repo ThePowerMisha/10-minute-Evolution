@@ -149,8 +149,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDamage: 5
   maxDamage: 10
-  speed: 4
+  speed: 8
   lifetime: 10
-  sprite: {fileID: 0}
-  target: {fileID: 0}
   targetTag: Player

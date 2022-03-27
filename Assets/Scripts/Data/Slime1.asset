@@ -21,6 +21,6 @@ MonoBehaviour:
     type: 3}
   enemySkillId: 0
   enemyCoolDown: 2
-  enemySpeed: 7
+  enemySpeed: 5
   enemyScore: 1
   enemyCoins: 0

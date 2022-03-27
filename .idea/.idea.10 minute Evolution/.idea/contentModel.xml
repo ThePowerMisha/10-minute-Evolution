@@ -5,21 +5,33 @@
       <e p="10 minute Evolution.sln" t="IncludeFlat" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="EscMenu.cs" t="Include" />
+        <e p="LvlUpInterface.cs" t="Include" />
+        <e p="MainMenu.cs" t="Include" />
         <e p="Scripts" t="Include">
+          <e p="CameraEffects.cs" t="Include" />
           <e p="CreateTerrain.cs" t="Include" />
+          <e p="DroppableObject.cs" t="Include" />
           <e p="Enemy" t="Include">
             <e p="EnemyBase.cs" t="Include" />
             <e p="EnemyData.cs" t="Include" />
             <e p="EnemyShoot.cs" t="Include" />
             <e p="HeathSystem.cs" t="Include" />
+            <e p="Turrets.cs" t="Include" />
           </e>
           <e p="EnemySpawner.cs" t="Include" />
+          <e p="GameStateManager.cs" t="Include" />
+          <e p="Location.cs" t="Include" />
+          <e p="LocationManager.cs" t="Include" />
+          <e p="LvlManager.cs" t="Include" />
+          <e p="MenuManager.cs" t="Include" />
           <e p="Player" t="Include">
             <e p="CameraFollowPlayer.cs" t="Include" />
             <e p="Player.cs" t="Include" />
             <e p="Projectile.cs" t="Include" />
             <e p="ShootWeapon.cs" t="Include" />
           </e>
+          <e p="PlayerCollisionsChecker.cs" t="Include" />
           <e p="PlayerStats.cs" t="Include" />
           <e p="SkillActions.cs" t="Include" />
           <e p="Skills" t="Include">
@@ -31,6 +43,7 @@
             <e p="SkillsSystem.cs" t="Include" />
             <e p="UI_ActiveSkillObject.cs" t="Include" />
             <e p="UI_SkillObject.cs" t="Include" />
+            <e p="UsableSkill.cs" t="Include" />
           </e>
           <e p="TimerTick.cs" t="Include" />
         </e>

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfe1861399542fe47ae332b08b149494, type: 3}
+  m_Name: Location 1
+  m_EditorClassIdentifier: 
+  locationName: "\u041B\u043E\u043A\u0430\u0446\u0438\u044F Tier 1"
+  locationSkills:
+  - {fileID: 11400000, guid: 4b65df24ff0230941b98274b22d19576, type: 2}
+  enemiesPrefabs:
+  - {fileID: 8448866829542075237, guid: da514cfa361e13348a8ed7d705a89da9, type: 3}
+  - {fileID: 1923046117185312684, guid: 10cac51b592610749957b0b768218f88, type: 3}
+  - {fileID: 8335864127283765113, guid: 5a11192549348ee4faaf06e34860ce09, type: 3}

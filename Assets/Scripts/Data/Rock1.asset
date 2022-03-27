@@ -16,7 +16,7 @@ MonoBehaviour:
   enemyID: 0
   enemyName: Rock
   enemyDescr: ROCK ROCK ROCK
-  enemyHealth: 0
+  enemyHealth: 80
   enemyProjectile: {fileID: -6000401333788268130, guid: caac241b4bbf1544e9e05461e17f900c,
     type: 3}
   enemySkillId: 0

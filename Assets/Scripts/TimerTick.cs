@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TimerTick : MonoBehaviour
@@ -23,6 +24,7 @@ public class TimerTick : MonoBehaviour
         else if (time < 0 )
         {
             time = 0;
+            SceneManager.LoadScene(1);
         }
 
         text.text = math.floor(time / 60).ToString("F0") + ":"+(time % 60).ToString("F0");
